@@ -20,44 +20,48 @@
 ***********************************/
 
 #include <stdio.h>
+
 int iffunction(int n, int factors[]) {
-    int factor = 0, sum = 0;
-    for (int i = 1; i <= n; i++) {
+
+    int how_many_factors = 0, sum = 0;
+    //计算所有因子并求和，记录有多少因子
+    for (int i = 1; i < n; i++) {
         if (n % i == 0) {
-            factors[factor] = i;
+            factors[how_many_factors] = i;
             sum += i;
-            factor++;
+            how_many_factors++;
         }
     }
-
-    if (sum == n)
-    {
-        return 1;
+    //判断是否为完数。是完数，返回因子数量；不是，返回0。
+    if (n == sum) {
+        return how_many_factors;
     }
-    else
-    {
+    else {
         return 0;
     }
+    
 }
 
-int main()
-{
-	int n;
-	scanf("%d", &n);
-    for (int j = 2; j <= n; j++)
-    {
-        int factors[10000];
+int main() {
 
-        if (iffunction(j) == 1)
-        {
-            printf("%d its factors are ", j);
+    int n;
+    scanf("%d", &n);
 
-            for (int i = 0; i <= n; i++) {
-            printf("%d ", factors[i]);
+    for (int j = 2; j <= n; j++) {
+
+        int factors[1000];  //必须定义数组的大小，否则报错。
+
+        if (iffunction(j, factors) != 0) {  //返回值不为0，是完数，输出结果
+            printf("%d its factors are ", j); 
+            //后面的循环输出所有因子
+            for (int i = 0; i < iffunction(j, factors); i++) {
+                printf("%d ", factors[i]);
             }
+            printf("\n");
+
         }
-    printf("\n");
     }
 
 return 0;
 }
+
