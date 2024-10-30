@@ -34,9 +34,10 @@ No!
 
 int isSquare(int num) {
     int n = 0;
-    if (num <= 0) return 0;
+    if (num <= 0) return -1;
+    if (num == 1) return 0;
     while (num > 1) {
-        if (num % 2 != 0) return 0;
+        if (num % 2 != 0) return -1;
         num /= 2;
         n++;
     }
@@ -47,11 +48,12 @@ int main() {
     int num;
     int end = 1;
     while (scanf("%d", &num) != EOF) {
-        if (num < 0) {
+        if (num < 0)
+        {
             num = -num;
-        } 
+        }
         int result = isSquare(num);
-        if (result != 0) {
+        if (result >= 0) {
             if (!end) printf("\n");
             printf("%d", result);
             end = 0;
@@ -63,7 +65,3 @@ int main() {
     }
     return 0;
 }
-
-
-
-
