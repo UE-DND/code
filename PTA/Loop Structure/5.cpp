@@ -18,37 +18,45 @@
 ***********************************/
 
 #include <stdio.h>
-int main() {
-    long long N;
-    scanf("%lld", &N);  //输入
-    int max_factor_length = 0, start = 0;  //start是当前最长连续因子的起始值
+#include <math.h>
 
-    // 枚举连续因子的起始值
-    for (int i = 2; i <= N; ++i) {
-        if (N % i == 0) {  //N能被i整除，那么i就是N的因子
-            int length = 1;
-            long long product = i;
-            while (product <= N) {
-                product *= (i + length);  //i在外层循环更新，所以下一个数是i+length。
-                if (N % product == 0) {  //检查下一个数是不是N的因子
-                    ++length;
+int main(void) {
+    int N = 0;
+    scanf("%d", &N);
+
+    int max_factor_length = 0, count = 0, the_smallest_factor = 0;
+    for (int i = 2; i <= (int)sqrt(N); i++) {
+        if (N % i == 0) {
+            count++;
+            int temp = N / i;  //temp是配对因子
+            for (int j = i + 1; j <= (int)sqrt(N) + 1; j++) {
+                if (temp % j == 0) {
+                    temp /= j;
+                    count++;
+                    //count是从i开始的，所以要减1
+                    if (count > max_factor_length) {
+                        max_factor_length = count;
+                        the_smallest_factor = j - max_factor_length + 1;
+                    }
                 } else {
+                    if (count > max_factor_length) {
+                        max_factor_length = count;
+                        the_smallest_factor = j - max_factor_length;
+                    }
+                    count = 0;
                     break;
                 }
-            }
-            if (length > max_factor_length) {  //更新最长因子长度
-                max_factor_length = length;
-                start = i;  //更新最长因子的起始值
             }
         }
     }
 
-    printf("%d\n", max_factor_length);  //输出最长因子长度
-    for (int i = 0; i < max_factor_length; ++i) {
-        if (i > 0) printf("*");  //每隔一个数输出*
-        printf("%d", start + i);  //输出所有因子
+    if (max_factor_length == 0) {
+        printf("1\n%d", N);
+    } else {
+        printf("%d\n", max_factor_length);
+        for (int i = the_smallest_factor; i < the_smallest_factor + max_factor_length - 1; i++) {
+            printf("%d*", i);
+        }
+        printf("%d", the_smallest_factor + max_factor_length - 1);
     }
-    printf("\n");
-
-return 0;
 }
