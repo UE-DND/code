@@ -28,7 +28,7 @@ int main() {
         if (N % i == 0) {  //N能被i整除，那么i就是N的因子
             int length = 1;
             long long product = i;
-            while (1) {  //无限循环，直到条件为假
+            while (product <= N) {
                 product *= (i + length);  //i在外层循环更新，所以下一个数是i+length。
                 if (N % product == 0) {  //检查下一个数是不是N的因子
                     ++length;
