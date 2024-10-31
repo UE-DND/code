@@ -30,33 +30,35 @@ int main(void) {
             count++;
             int temp = N / i;  //temp是配对因子
             for (int j = i + 1; j <= (int)sqrt(N) + 1; j++) {
-                if (temp % j == 0) {
+                if (temp % j == 0) {  //配对因子j
                     temp /= j;
                     count++;
-                    //count是从i开始的，所以要减1
+                    //更新最大长度和最小因子
                     if (count > max_factor_length) {
                         max_factor_length = count;
                         the_smallest_factor = j - max_factor_length + 1;
                     }
-                } else {
+                } else {  //配对因子j不连续，重置count
                     if (count > max_factor_length) {
                         max_factor_length = count;
                         the_smallest_factor = j - max_factor_length;
                     }
                     count = 0;
-                    break;
+                    break;  //break出for循环，进入下一个i
                 }
             }
         }
     }
 
-    if (max_factor_length == 0) {
+    if (max_factor_length == 0) {  //质数
         printf("1\n%d", N);
     } else {
         printf("%d\n", max_factor_length);
+        //最小因子序列
         for (int i = the_smallest_factor; i < the_smallest_factor + max_factor_length - 1; i++) {
             printf("%d*", i);
         }
+        //最后一个因子单独输出，避免多余*
         printf("%d", the_smallest_factor + max_factor_length - 1);
     }
 }
