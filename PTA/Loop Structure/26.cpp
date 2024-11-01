@@ -31,37 +31,25 @@ No!
 ***********************************/
 
 #include <stdio.h>
+#include <stdint.h>
 
-int isSquare(int num) {
-    int n = 0;
-    if (num <= 0) return -1;
-    if (num == 1) return 0;
-    while (num > 1) {
-        if (num % 2 != 0) return -1;
-        num /= 2;
-        n++;
-    }
-    return n;
-}
-
-int main() {
-    int num;
-    int end = 1;
-    while (scanf("%d", &num) != EOF) {
-        if (num < 0)
-        {
-            num = -num;
+int main(void) {
+    int64_t num;  //傻逼题目，32位的int不够用，直接溢出了
+    while (scanf("%lld", &num) != EOF) {
+        if (num < 0) num = -num;
+        if (num == 0) {
+            printf("No!\n");
+            continue;
         }
-        int result = isSquare(num);
-        if (result >= 0) {
-            if (!end) printf("\n");
-            printf("%d", result);
-            end = 0;
-        } else {
-            if (!end) printf("\n");
-            printf("No!");
-            end = 0;
+        int n = 0;
+        while (num > 1) {
+            if (num % 2 != 0) {
+                printf("No!\n");
+                break;
+            }
+            num /= 2;
+            n++;
         }
+        if (num == 1) printf("%d\n", n);
     }
-    return 0;
 }
