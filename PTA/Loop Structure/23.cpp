@@ -21,26 +21,27 @@
 
 #include <stdio.h>
 
-int main() {
-    int T, n;
-    scanf("%d %d", &T, &n);
-
-    for (int i = 0; i < T; i++) {
-        int count = 0;
-
-        for (int big_horse = 0; big_horse <= n / 5; big_horse++) {
-            for (int middle_horse = 0; middle_horse <= (n - big_horse * 5) / 3; middle_horse++) {
-                int remaining = n - big_horse * 5 - middle_horse * 3;
-                if (remaining >= 0 && remaining % 2 == 0) {  //确保小马数量为非负整数
-
-                    int small_horse = remaining / 2;
-                    if (big_horse + middle_horse + small_horse == n) {
-                        count++;
-                    }
-                }
+int solve(int n) {
+    int count = 0;
+    //x大马，y中马，z小马
+    for(int x = 0; x <= n/5; x++) {
+        for(int y = 0; y <= n/3; y++) {
+            int z = n - x - y;
+            if(z < 0 || z % 2 != 0) continue;  //z不是偶数,下一个循环
+            if(5 * x + 3 * y + z / 2 == n) {  //总数为n
+                count++;
             }
         }
-        printf("%d\n", count);
     }
-return 0;
+    return count;
+}
+
+int main(void) {
+    int T;
+    scanf("%d", &T);
+    while(T--) {
+        int n;
+        scanf("%d", &n);
+        printf("%d\n", solve(n));
+    }
 }
