@@ -25,14 +25,17 @@ int main(void) {
 
     printf("%d=", num);
     int i = 2;
+    /*如果 i 从 1 开始，num % i == 0 总是为真（因为任何数都能被 1 整除），
+    这会导致无限循环，因为 num 会被不断地除以 1，而不会变小。
+    */
     while (num > 1) {
         if (num % i == 0) {
             printf("%d", i);
-            num /= i;
+            num /= i;  //新的num是i的配对因子
             if (num > 1) {
                 printf("*");
             }
-        } else {
+        } else {  //如果num不能被i整除，即i不是num的因子，判断下一个i
             i++;
         }
     }
