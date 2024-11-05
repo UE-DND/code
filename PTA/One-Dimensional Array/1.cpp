@@ -27,7 +27,7 @@ int main() {
     int store[100001], repeat = 0, n;
     scanf("%d", &n);
 
-    for(int i=0; i<n; i++)
+    for(int i = 0; i < n; i++)
         scanf("%d", &store[i]);
     //考虑n=1的情况
     if(n == 1) {
@@ -35,25 +35,19 @@ int main() {
         return 0;
     }
     //使用暴力法，与之前所有的数字比较
-    for(int i=0; i<n; i++) {
-        for(int j=0; j<i; j++) {
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < i; j++) {
         if(store[i] == store[j]) {
             printf("YES");
             repeat++;
             break;
             }
         }
-        if(repeat != 0) break;
+        if(repeat != 0) 
+        break;
     }
     if(repeat == 0) printf("NO");
     
 return 0;
 }
 //用哈希表会报段错误，这是为什么呢
-
-
-
-    
-
-
-
