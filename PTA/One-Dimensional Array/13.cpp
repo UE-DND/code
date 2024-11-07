@@ -18,13 +18,12 @@
 
 //由于输入数据长度未知，即素数的长度未知，所以不能使用计数排序
 #include <stdio.h>
-#include <math.h>
 
-isPrime(int n) {
-   if (n == 1) {
+int is_prime(int n) {
+   if (n <= 1) {
       return 0;
    }
-   for (int i = 2; i <= sqrt(n); i++) {
+   for (int i = 2; i * i <= n; i++) {
       if (n % i == 0) {
          return 0;
       }
@@ -32,31 +31,39 @@ isPrime(int n) {
    return 1;
 }
 
-int main(void) {
-   int a[10], prime[10], count = 0;
+int main() {
+   int a[10];
+   int primes[10];
+   int prime_count = 0;
 
-   for (int i = 0; i < 10; i++)
-   {
+   for (int i = 0; i < 10; i++) {
       scanf("%d", &a[i]);
-      if (isPrime(a[i])) {
-         prime[count] = a[i];
-         count++;
+   }
+
+   for (int i = 0; i < 10; i++) {
+      if (is_prime(a[i])) {
+         primes[prime_count] = a[i];
+         prime_count++;
       }
    }
-   
+
    //这里使用冒泡排序
-   for (int i = 0; i < count; i++) {
-      for (int j = i + 1; j < count; j++) {
-         if (prime[i] > prime[j]) {
-            int temp = prime[i];
-            prime[i] = prime[j];
-            prime[j] = temp;
+   for (int i = 0; i < prime_count - 1; i++) {
+      for (int j = i + 1; j < prime_count; j++) {
+         if (primes[i] > primes[j]) {
+               int temp = primes[i];
+               primes[i] = primes[j];
+               primes[j] = temp;
          }
       }
    }
 
-   for (int i = 0; i < count; i++) {
-      printf("%4d", prime[i]);
+   for (int i = 0; i < prime_count; i++) {
+      printf("%4d", primes[i]);
+   }
+
+   if (prime_count > 0) {
+      printf("\n");
    }
 
 return 0;

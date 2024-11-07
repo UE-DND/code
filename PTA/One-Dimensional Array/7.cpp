@@ -24,11 +24,29 @@
 
 #include <stdio.h>
 
-int main(void) {
+int main() {
     int N, M;
     scanf("%d %d", &N, &M);
-    int a[N];
+    int arr[N];
+
     for (int i = 0; i < N; i++) {
-        scanf("%d", &a[i]);
+        scanf("%d", &arr[i]);
     }
-    M = M % N;
+    int first = N - M;
+
+    for (int i = first; i < N; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    for (int i = 0; i < first - 1; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    printf("%d", arr[first - 1]);
+    printf("\n");
+
+return 0;
+}
+
+
+
