@@ -25,12 +25,46 @@
 
 ***********************************/
 
+//直接引用了第2题的排序，不要在意为什么有score
 #include <stdio.h>
 
 int main(void) {
-    int n, count = 0;
+
+    int n;
     scanf("%d", &n);
-    int arr[n];
+    int gift_count = 0;
+
+    int count[1001] = {0};  //数组用于存储每个分数的出现次数，下标位为分数值
+    //注意count[100]只能表示0~99之间的分数
     for (int i = 0; i < n; i++) {
-        scanf("%d", &arr[i]);
+        int score;
+        scanf("%d", &score);
+        count[score]++;
     }
+
+    int stickers[1001];  //用于存储排序后的贴纸
+    int k = 0;  //写入的索引
+
+    for (int i = 0; i <= 1000; i++) {
+        while (count[i] > 0) {
+            stickers[k++] = i;
+            count[i]--;
+        }
+    }
+
+    int i = 0;
+    while (i <= n - 3) {
+        if (stickers[i+1] == stickers[i] + 1 && stickers[i+2] == stickers[i] + 2) {
+            gift_count++;  // 找到三个连续的数字，可以兑换一个小礼物
+            i += 3;  // 跳过这三个数字
+        } else {
+            i++;
+        }
+    }
+
+    printf("%d\n", gift_count);
+
+return 0;
+}
+
+
