@@ -22,3 +22,13 @@
 
 ***********************************/
 
+#include <stdio.h>
+
+int main(void) {
+    int N, M;
+    scanf("%d %d", &N, &M);
+    int a[N];
+    for (int i = 0; i < N; i++) {
+        scanf("%d", &a[i]);
+    }
+    M = M % N;
