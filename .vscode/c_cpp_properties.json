@@ -12,9 +12,8 @@
             "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "macos-clang-arm64",
-            "compilerPath": "/usr/bin/clang++"
+            "compilerPath": "/usr/bin/clang"
         },
-
         {
             "name": "Win32",
             "includePath": [
