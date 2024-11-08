@@ -24,29 +24,58 @@
 
 #include <stdio.h>
 
-int main() {
-    int N, M;
-    scanf("%d %d", &N, &M);
-    int arr[N];
+int main(void) {
+    int n, m;
+    int a[100];
+    int first = 1;
+    scanf("%d %d", &n, &m);
 
-    for (int i = 0; i < N; i++) {
-        scanf("%d", &arr[i]);
-    }
-    int first = N - M;
-
-    for (int i = first; i < N; i++) {
-        printf("%d ", arr[i]);
+    for(int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
     }
 
-    for (int i = 0; i < first - 1; i++) {
-        printf("%d ", arr[i]);
+    if(m == 0) {  //不需要移动
+        for(int i = 0; i < n; i++) {
+            if(!first) printf(" ");
+            printf("%d", a[i]);
+            first = 0;
+        }
+        return 0;
+    }
+    
+    //反转整个数组 6 5 4 3 2 1
+    for (int i = 0; i < n / 2; i++)
+    {
+        int temp = a[i];
+        a[i] = a[n - i - 1];
+        a[n - i - 1] = temp;
+    }
+    
+    
+    //反转前m个元素 5 6 4 3 2 1
+    for (int i = 0; i < m / 2; i++)
+    {
+        int temp = a[i];
+        a[i] = a[m - i - 1];
+        a[m - i - 1] = temp;
+    }
+    
+    
+    //反转剩余n-m个元素  5 6 1 2 3 4
+    for (int i = 0; i < (n - m) / 2; i++)
+    {
+        int temp = a[m + i];
+        a[m + i] = a[n - i - 1];
+        a[n - i - 1] = temp;
     }
 
-    printf("%d", arr[first - 1]);
+    for(int i = 0; i < n; i++) {
+        if(!first) printf(" ");
+        printf("%d", a[i]);
+        first = 0; 
+    }
+    
     printf("\n");
 
 return 0;
 }
-
-
-

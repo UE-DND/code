@@ -23,44 +23,44 @@
 
 #include <stdio.h>
 
-int main(void) {
-    int n;
+int main() {
+    int n, num;
+    int count[10] = {0}; //每个数字出现的次数
+    int max_count = 0;  //最大出现次数
+    
     scanf("%d", &n);
-    int count[20] = {0};
-    for (int i = 0; i < n; i++) {
-        int score;
-        scanf("%d", &score);
-        count[score]++;
-    }
-    int turned_scores[101];  
-    //这道题直接引用了第二题的功能，先排序了再删，懒得重新写
-    //turned_scores[n]存储排序后的分数
-
-    int k = 0;  // 用于 turned_scores 的下标
-    for (int i = 0; i <= 100; i++) {
-        for (int j = 0; j < count[i]; j++) {
-            turned_scores[k++] = i;  // 将分数升序存储到turned_scores中
-        }
-    }
-
-    //以下部分涉及指针，还没学，看不懂就算了
-
-    int j = 0;  //慢指针，指向已去重的数组
-    for (int i = 1; i < k; i++) {
-        if (turned_scores[i]!= turned_scores[j]) {
-            j++;
-            turned_scores[j] = turned_scores[i];  //将当前元素放到去重数组的下一个位置
-        }
-    }
-
-    int first = 1;
-    for (int i = 0; i <= j; i++) {  //这里就体现了只输出到j的位置
-        if (first) {
-            printf("%d", turned_scores[i]);
-            first = 0;
+    
+    //提取并统计每个数字出现的次数
+    for(int i = 0; i < n; i++) {
+        scanf("%d", &num);
+        
+        if(num == 0) {
+            count[0]++;
         } else {
-            printf(" %d", turned_scores[i]);
+            while(num > 0) {
+                count[num % 10]++;
+                num /= 10;
+            }
         }
     }
+    
+
+    for(int i = 0; i < 10; i++) {
+        if(count[i] > max_count) {
+            max_count = count[i];
+        }
+    }
+    
+    
+    printf("%d:", max_count);
+
+    for(int i = 0; i < 10; i++) {
+        if(count[i] == max_count) {
+            printf(" %d", i);
+        }
+    }
+
     printf("\n");
+    
+return 0;
 }

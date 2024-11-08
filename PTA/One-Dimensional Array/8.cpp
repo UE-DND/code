@@ -73,40 +73,72 @@ int main() {
 
 int main(void) {
     int n1, n2;
+    int arr1[20], arr2[20];
+    int i, j;
+    
     scanf("%d", &n1);
-    int arr1[n1];
-    for (int i = 0; i < n1; i++) {
+    for(i = 0; i < n1; i++) {
         scanf("%d", &arr1[i]);
     }
+
     scanf("%d", &n2);
-    int arr2[n2];
-    for (int i = 0; i < n2; i++) {
-        scanf("%d", &arr2[i]);
+    for(i = 0; i < n2; i++) {
+        scanf("%d", &arr2[i]); 
     }
-
-    int count[100001] = {0};
-
-    for (int i = 0; i < n1; i++) {
-        count[arr1[i]]++;
-    }
-
-    for (int i = 0; i < n2; i++) {
-        count[arr2[i]]++;
-    }
-
+    
+    //遍历第一个数组,输出不在第二个数组中的元素
     int first = 1;
-    for (int i = 0; i < 100001; i++) {
-        if (count[i] == 1) {
-            if (first) {
-                printf("%d", i);
-                first = 0;
-            } else {
-                printf(" %d", i);
+
+    for(i = 0; i < n1; i++) {
+        int found = 0;
+        //检查当前数字是否在之前已经输出过，避免重复输出
+        for(j = 0; j < i; j++) {
+            if(arr1[i] == arr1[j]) {
+                found = 1;
+                break;
             }
         }
+        if(found) continue;
+        
+        //检查是否在第二个数组中存在
+        for(j = 0; j < n2; j++) {
+            if(arr1[i] == arr2[j]) {
+                found = 1;
+                break;
+            }
+        }
+        if(!found) {  //如果元素没有在 arr2 中找到，则输出该元素
+            if(!first) printf(" ");
+            printf("%d", arr1[i]);
+            first = 0;
+        }
     }
-
-    printf("\n");
-
-    return 0;
+    
+    //输出不在第一个数组中的元素
+    for(i = 0; i < n2; i++) {
+        int found = 0;
+        
+        for(j = 0; j < i; j++) {
+            if(arr2[i] == arr2[j]) {
+                found = 1;
+                break;
+            }
+        }
+        if(found) continue;
+        
+        //检查是否在第一个数组中存在
+        for(j = 0; j < n1; j++) {
+            if(arr2[i] == arr1[j]) {
+                found = 1;
+                break; 
+            }
+        }
+        if(!found) {
+            if(!first) printf(" ");
+            printf("%d", arr2[i]);
+            first = 0;
+        }
+    }
+    
+return 0;
 }
