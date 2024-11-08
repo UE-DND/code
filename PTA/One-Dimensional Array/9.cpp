@@ -22,107 +22,11 @@
 ***********************************/
 
 #include <stdio.h>
-#include <stdint.h>
-
-#define MAX_SIZE 101  // 假设数组元素的值不超过100
-
-void remove_duplicates(int arr[], int n, int result[], int* result_size) {
-    int count[MAX_SIZE] = {0};  // 统计每个元素出现的次数
-    for (int i = 0; i < n; i++) {
-        count[arr[i]]++;
-    }
-
-    // 去重并按升序排列
-    *result_size = 0;
-    for (int i = 0; i < MAX_SIZE; i++) {
-        if (count[i] > 0) {
-            result[*result_size] = i;
-            (*result_size)++;
-        }
-    }
-}
-
-void find_unique_elements(int arr1[], int size1, int arr2[], int size2) {
-    int unique[2 * MAX_SIZE];  // 用于存储不重复的元素
-    int idx = 0;
-
-    // 查找arr1中不在arr2中的元素
-    for (int i = 0; i < size1; i++) {
-        int found = 0;
-        for (int j = 0; j < size2; j++) {
-            if (arr1[i] == arr2[j]) {
-                found = 1;
-                break;
-            }
-        }
-        if (!found) {
-            unique[idx++] = arr1[i];
-        }
-    }
-
-    // 查找arr2中不在arr1中的元素
-    for (int i = 0; i < size2; i++) {
-        int found = 0;
-        for (int j = 0; j < size1; j++) {
-            if (arr2[i] == arr1[j]) {
-                found = 1;
-                break;
-            }
-        }
-        if (!found) {
-            unique[idx++] = arr2[i];
-        }
-    }
-
-    // 输出结果
-    int first = 1;
-    for (int i = 0; i < idx; i++) {
-        if (first) {
-            printf("%d", unique[i]);
-            first = 0;
-        } else {
-            printf(" %d", unique[i]);
-        }
-    }
-    printf("\n");
-}
-
-int main() {
-    int n1, n2;
-    
-    scanf("%d", &n1);
-    int arr1[n1];
-    for (int i = 0; i < n1; i++) {
-        scanf("%d", &arr1[i]);
-    }
-
-    scanf("%d", &n2);
-    int arr2[n2];
-    for (int i = 0; i < n2; i++) {
-        scanf("%d", &arr2[i]);
-    }
-
-    // 去重处理
-    int result1[MAX_SIZE], result_size1;
-    remove_duplicates(arr1, n1, result1, &result_size1);
-    
-    int result2[MAX_SIZE], result_size2;
-    remove_duplicates(arr2, n2, result2, &result_size2);
-    
-    // 查找两个数组中不在另一个数组中的元素
-    find_unique_elements(result1, result_size1, result2, result_size2);
-
-    return 0;
-}
-
-
-
-#include <stdio.h>
 
 int main(void) {
     int n;
     scanf("%d", &n);
-    int count[101] = {0};
+    int count[20] = {0};
     for (int i = 0; i < n; i++) {
         int score;
         scanf("%d", &score);
