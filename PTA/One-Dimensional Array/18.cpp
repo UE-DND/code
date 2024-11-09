@@ -32,34 +32,61 @@
 
 #include <stdio.h>
 
-int main()
-{
-	int n, k, m;
-	scanf("%d %d %d", &n, &m, &k);
-	int a[201] = {0};
-    int b[201] = {0};
+int monkey_king(int n, int m, int k) {
+    int monkeys[200] = {0};  //猴子数组，0表示在圈中，1表示已离开
+    int count = n;  //剩余猴子数量
+    int current = 0;  //当前位置
+    int forward = 1;  //1表示顺序数，0表示逆序数
     
-	for(int i = 0; i < n; i++) {
-		a[i] = i + 1;
+    //初始化猴子数组
+    for(int i = 0; i < n; i++) {
+        monkeys[i] = 0;
     }
-
-        for (int i = 0, j = 0; i < n; i++) {
-            if (i == m - 1) {
-                continue;
-            }
-            b[j] = a[i];
-            j++;
-        }
-        n--;
-        for (int i = 0, j = 0; i < count; i++)
-        {
-            if (i == k - 1)
-            {
-                continue;
-            }
-            a[j] = b[i];
-            j++;
-        }
     
+    while(count > 1) {
+        if(forward) {
+            //顺序数m个
+            int steps = m;
+            int temp = current;
+            while(steps > 0) {
+                temp = (temp + 1) % n;
+                if(monkeys[temp] == 0) {  //只数还在圈中的猴子
+                    steps--;
+                }
+            }
+            current = temp;
+            monkeys[current] = 1;  //移除这只猴子
+            count--;
+            forward = 0;
+        } else {
+            //逆序数k个
+            int steps = k;
+            int temp = current;
+            while(steps > 0) {
+                temp = (temp - 1 + n) % n;
+                if(monkeys[temp] == 0) {  //只数还在圈中的猴子
+                    steps--;
+                }
+            }
+            current = temp;
+            monkeys[current] = 1;
+            count--;
+            forward = 1;
+        }
+    }
     
+    // 找到最后剩下的猴子
+    for(int i = 0; i < n; i++) {
+        if(monkeys[i] == 0) {
+            return i + 1;  // 因为猴子编号从1开始
+        }
+    }
+    return 0;  // 不应该到达这里
+}
 
+int main() {
+    int n, m, k;
+    scanf("%d %d %d", &n, &m, &k);
+    printf("%d\n", monkey_king(n, m, k));
+    return 0;
+}

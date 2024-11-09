@@ -30,52 +30,49 @@ int main(void) {
     int first = 1;
     scanf("%d %d", &n, &m);
 
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         scanf("%d", &a[i]);
     }
 
-    if(m == 0) {  //不需要移动
-        for(int i = 0; i < n; i++) {
-            if(!first) printf(" ");
+    m = m % n;  //若有数组a[] = {1, 2, 3, 4, 5, 6}，右移7次和右移1次是等效的
+
+    if (m == 0) {  //不需要移动
+        for (int i = 0; i < n; i++) {
+            if (!first) printf(" ");
             printf("%d", a[i]);
             first = 0;
         }
+        printf("\n");
         return 0;
     }
-    
-    //反转整个数组 6 5 4 3 2 1
-    for (int i = 0; i < n / 2; i++)
-    {
+
+    //反转整个数组
+    for (int i = 0; i < n / 2; i++) {
         int temp = a[i];
         a[i] = a[n - i - 1];
         a[n - i - 1] = temp;
     }
-    
-    
-    //反转前m个元素 5 6 4 3 2 1
-    for (int i = 0; i < m / 2; i++)
-    {
+
+    //反转前 m 个元素
+    for (int i = 0; i < m / 2; i++) {
         int temp = a[i];
         a[i] = a[m - i - 1];
         a[m - i - 1] = temp;
     }
-    
-    
-    //反转剩余n-m个元素  5 6 1 2 3 4
-    for (int i = 0; i < (n - m) / 2; i++)
-    {
-        int temp = a[m + i];
-        a[m + i] = a[n - i - 1];
-        a[n - i - 1] = temp;
+
+    //反转剩余的 n - m 个元素
+    for (int i = m; i < (n + m) / 2; i++) {
+        int temp = a[i];
+        a[i] = a[n + m - i - 1];
+        a[n + m - i - 1] = temp;
     }
 
-    for(int i = 0; i < n; i++) {
-        if(!first) printf(" ");
+    for (int i = 0; i < n; i++) {
+        if (!first) printf(" ");
         printf("%d", a[i]);
-        first = 0; 
+        first = 0;
     }
-    
     printf("\n");
 
-return 0;
+    return 0;
 }
