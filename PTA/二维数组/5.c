@@ -36,46 +36,46 @@ n行，每行m个整数，为模糊处理后的图像。
 
 ***********************************/
 
-#include<stdio.h>
+#include <stdio.h>
 
 int main(void)
 {
-	int n, m;
-	scanf("%d %d", &n, &m);
-	int a[n][m];
-	
-	for(int i = 0;i < n; i++)
-	{
-		for(int j = 0; j < m; j++)
-		{
-			scanf("%d", &a[i][j]);
-		}
-	}
+    int n, m;
+    scanf("%d %d", &n, &m);
+    int a[n][m];
 
-	for(int i = 1; i < n-1; i++)
-	{
-		for(int j = 1; j < m-1; j++)
-		{
-			a[i][j] = (a[i-1][j]+a[i+1][j]+a[i][j-1]+a[i][j+1]+a[i][j])/5;
-		}
-	}
-    
-	for(int i = 0;i < n; i++)
-	{
-		for(int j=0;j<m;j++)
-		{
-			if(j==m-1)
-			{
-				printf("%d",a[i][j]);
-			} else {
-                printf("%d ",a[i][j]);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
 
+    // 创建一个数组来存储处理后的图像
+    int b[n][m];
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (i == 0 || i == n - 1 || j == 0 || j == m - 1) {
+                // 边界像素不变
+                b[i][j] = a[i][j];
+            } else {
+                // 模糊处理
+                b[i][j] = (a[i-1][j] + a[i+1][j] + a[i][j-1] + a[i][j+1] + a[i][j] + 2) / 5;
             }
+        }
+    }
 
-			
-		}
-		printf("\n");
-	}
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (j == m - 1) {
+                printf("%d", b[i][j]);
+            } else {
+                printf("%d ", b[i][j]);
+            }
+        }
+        printf("\n");
+    }
 
 	return 0;
 }
+
