@@ -104,7 +104,7 @@ int main(void) {
 
     for (int i = 0; i < 3; i++) 
     {
-        printf("string[%d]: %s\n", i, string[i]);
+        printf("%s\n", string[i]);
     }
 
     return 0;
