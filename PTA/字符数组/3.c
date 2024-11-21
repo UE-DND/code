@@ -19,6 +19,13 @@
 
 ***********************************/
 
+/*写了几版都有问题
+参考了网上的代码
+https://blog.csdn.net/m0_60738889/article/details/136089158
+原文写了一堆无意义的函数，可能是出于加密目的。
+我就直接修改了，方便理解。
+*/
+
 #include <stdio.h>
 
 int main() {
@@ -31,7 +38,7 @@ int main() {
 
     int zhengshu_part = (int)num;
     int xiaoshu_part = (int)((num - zhengshu_part + 0.005) * 100);  // 0.005是一个极小值，为了防止浮点数舍入误差
-
+    
     int divisor = 10000000;
     // 提取整数部分的每一位，并输出对应的汉字和单位
     for (int i = 0; i < 8; i++) {
@@ -44,7 +51,8 @@ int main() {
     }
 
     // 整数部分为0的特殊情况
-    if (zhengshu_part == 0) {
+    int k = num;
+    if (k == 0) {
         printf("元");
     }
 
@@ -57,7 +65,6 @@ int main() {
         if(jiao > 0 && fen == 0) {
             printf("%s%s", chinese[jiao], "角");
         }
-        if(jiao == 0 && fen == 0);
         if(jiao == 0 && fen > 0) {
             printf("%s%s",chinese[fen], "分");
         }
