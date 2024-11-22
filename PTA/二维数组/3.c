@@ -66,31 +66,31 @@
 #include <stdio.h>
 
 int reward[25] = {
-    0,      // reward[0]  未使用
-    0,      // reward[1]  未使用
-    0,      // reward[2]  未使用
-    0,      // reward[3]  未使用
-    0,      // reward[4]  未使用
-    0,      // reward[5]  未使用
-    10000,  // reward[6]  = 1+2+3
-    36,     // reward[7]  = 1+2+4
-    720,    // reward[8]  = 1+2+5
-    360,    // reward[9]  = 1+2+6
-    80,     // reward[10] = 1+3+6
-    252,    // reward[11]
-    108,    // reward[12]
-    72,     // reward[13]
-    54,     // reward[14]
-    180,    // reward[15]
-    72,     // reward[16]
-    180,    // reward[17]
-    119,    // reward[18]
-    36,     // reward[19]
-    306,    // reward[20]
-    1080,   // reward[21]
-    144,    // reward[22]
-    1800,   // reward[23]
-    3600    // reward[24] = 7+8+9
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    10000,
+    36,
+    720,
+    360,
+    80,
+    252,
+    108,
+    72,
+    54,
+    180,
+    72,
+    180,
+    119,
+    36,
+    306,
+    1080,
+    144,
+    1800,
+    3600
 };
 
 int main() {
@@ -139,5 +139,72 @@ int main() {
 
     printf("%d\n", reward[sum]);
 
+    return 0;
+}
+
+
+// 以下是老师公布的正确代码
+#include <stdio.h>
+
+int main() {
+    int arr[3][3], out[3][3] = {0}, i, j, k, g, row, col, sum = 0, sum_gold = 0;
+    int money[] = {10000, 36, 720, 360, 80, 252, 108, 72, 54, 180, 
+                      72, 180, 119, 36, 306, 1080, 144, 1800, 3600};
+
+    // 读入彩票数据
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            scanf("%d", &arr[i][j]);
+            sum += arr[i][j];
+            if (arr[i][j] == 0) {
+                row = i;
+                col = j;
+            }
+        }
+    }
+    out[row][col] = arr[row][col] = 45 - sum;  // 1累加到9的和为45，减去已知的数字和，得到未知数字
+
+    // 读入刮开位置并输出对应数字
+    int brr[3][2];
+    for (k = 0; k < 3; k++) {
+        for (g = 0; g < 2; g++) {
+            scanf("%d", &brr[k][g]);
+        }
+        printf("%d\n", arr[brr[k][0] - 1][brr[k][1] - 1]);
+        out[brr[k][0] - 1][brr[k][1] - 1] = arr[brr[k][0] - 1][brr[k][1] - 1];
+    }
+    
+    // 读入选择的方向
+    int num;
+    scanf("%d", &num);
+    
+    // 计算选择方向上的和
+    int line_sum = 0;
+    if (num >= 1 && num <= 3) {  // 横向
+        for (j = 0; j < 3; j++) {
+            line_sum += arr[num - 1][j];
+        }
+    }
+    else if (num >= 4 && num <= 6) {  // 纵向
+        for (i = 0; i < 3; i++) {
+            line_sum += arr[i][num - 4];
+        }
+    }
+    else if (num == 7) {  // 主对角线
+        for (i = 0; i < 3; i++) {
+            line_sum += arr[i][i];
+        }
+    }
+    else if (num == 8) {  // 副对角线
+        for (i = 0; i < 3; i++) {
+            line_sum += arr[i][2-i];
+        }
+    }
+    
+    // 根据和值查找对应金额
+    if (line_sum >= 6 && line_sum <= 24) {
+        printf("%d\n", money[line_sum - 6]);
+    }
+    
     return 0;
 }
