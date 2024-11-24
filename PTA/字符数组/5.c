@@ -26,9 +26,10 @@ abcbd
 
 // 这个方法不能通过部分测试点，因为时间复杂度太高，懒得改了
 // 感兴趣可以研究一下动态规划，我看不懂。
+
 #include <stdio.h>
 #include <string.h>
-
+// 使用递归
 int function(int i, int j, char *str1, char *str2) {
     if (i == 0 || j == 0) {
         return 0;
