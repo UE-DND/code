@@ -56,7 +56,7 @@ int main() {
         }
     }
 
-    calculate(&scores[0][0], m, n);  // 还是传递首地址，这里不能写scores[0]
+    calculate(&scores[0][0], m, n);
 
     return 0;
 }
