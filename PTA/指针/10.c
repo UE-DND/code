@@ -34,54 +34,48 @@ Table-water:2;Table-water:1;Table-water:1;Milk:1;Beer:1;Oolong-Tea:1;Green-Tea:1
 
 ***********************************/
 
-#include <stdio.h>
-#include <stdlib.h>
+//代码参考于网络
+#include<stdio.h>
 
-int main() {
-    int n = 0, m = 0, total_amount = 0, total_cost = 0;
-    int a[10] = {0};  // 记录商品购买数量
-
-    char *name[10] = {
-        "Table-water", "Table-water", "Table-water", "Coca-Cola", "Milk", 
-        "Beer", "Orange-Juice", "Sprite", "Oolong-Tea", "Green-Tea"
-    };
-    int price[10] = {1, 1, 1, 2, 2, 3, 3, 3, 4, 4};
-
-    while (1) {
-        scanf("%d", &n);
-        if (n == -1) {
-            break;
-        }
-        total_amount += n;
+int main()
+{
+    int total = 0, change, money;
+    while(1) {
+        scanf("%d",&money);
+        if(money == -1) break;
+        total += money;
     }
 
-    int remaining = total_amount;
+    change = total;
 
-    while (1) {
-        scanf("%d", &m);
-        if (m == -1) {
-            break;
+    int prize[10] = {1, 1, 1, 2, 2, 3, 3, 3, 4, 4},
+        num[10] = {0};
+
+    char products[10][13] = {"Table-water","Table-water","Table-water","Coca-Cola","Milk","Beer",
+                            "Orange-Juice","Sprite","Oolong-Tea","Green-Tea"};
+
+    int b;
+    while(1) {
+        scanf("%d", &b);
+
+        if(b == -1) break;
+
+        change -= prize[b-1];
+
+        if(change < 0){
+            printf("Insufficient money");
+            return 0;
         }
+        num[b-1]++;
+    }
+    printf("Total:%dyuan,change:%dyuan\n",total, change);
 
-        if (remaining >= price[m - 1]) {
-            a[m - 1]++;
-            total_cost += price[m - 1];
-            remaining -= price[m - 1];
-        } else {
-            printf("Insufficient money\n");
-            break;
+    for(int i = 0; i < 10; i++)
+    {
+        if(num[i] != 0)
+        {
+            printf("%s:%d;\n",products[i], num[i]);
         }
     }
-
-    printf("Total:%dyuan,change:%dyuan\n", total_amount, remaining);
-
-    for (int i = 0; i < 10; i++) {
-        if (a[i] != 0) {
-            printf("%s:%d;", name[i], a[i]);
-        }
-    }
-    
-    printf("\n");
-    
     return 0;
 }

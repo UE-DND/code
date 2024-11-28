@@ -62,7 +62,7 @@ int main() {
     }
 
     // 修个bug，最后一个单词没有翻转，懒得重写了
-    reverse(begin, copy - 1);
+    reserve(begin, copy - 1);
 
     printf("%s", input);
 

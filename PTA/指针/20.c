@@ -26,6 +26,7 @@
 
 ***********************************/
 
+#pragma GCC optimize(3,"Ofast","inline")
 #include <stdio.h>
 
 double calculate(int *score, int n) {
@@ -51,7 +52,7 @@ int main() {
     int m, n;
     scanf("%d %d", &m, &n);
 
-    int score[m][n];
+    int score[m][n], order[m];
     double final_score[m];
     for (int i = 0; i < m; i++)
     {
@@ -59,19 +60,10 @@ int main() {
         {
             scanf("%d", (*(score + i) + j));
         }
-    }
-
-    int order;
-    for (int i = 0; i < m; i++)
-    {
         order[i] = i + 1;
-    }
-    
-    for (int i = 0; i < m; i++)
-    {
         final_score[i] = calculate(score[i], n);
     }
-    
+
     for (int i = 0; i < m - 1; i++)
     {
         for (int j = 0; i < m - 1 - i; j++)
@@ -91,10 +83,8 @@ int main() {
     
     for (int i = 0; i < m; i++)
     {
-        printf("%3d", *(order + i));
+        printf("%3d\n", *(order + i));
     }
-    printf("\n");
 
     return 0;
 }
-
