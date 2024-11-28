@@ -11,22 +11,25 @@ bcc
 ***********************************/
 
 #include <stdio.h>
-#include <string.h>
 
 int main() {
-    char str[100];
-    fgets(str, sizeof(str), stdin);
+    char str[100], *p, *q;
+    fgets(str, 100, stdin);
 
-    char *p = str;
-    while (*p!= '\0')
-    {
-        if (*p == 'a')
-        {
-            *p = *(p + 1);  // 将a替换为下一个字符
-        } else {
-            p++;
+    p = str;
+    q = str;
+
+    while (*p!= '\0') {
+        if (*p!= 'a') {
+            *q = *p;
+            q++;
         }
+        p++;
     }
+
+    *q = '\0';
+
     printf("%s", str);
+
     return 0;
 }

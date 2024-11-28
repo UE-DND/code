@@ -28,11 +28,21 @@ int main() {
     
     int elem[m][n];
     int *p = (int *)malloc(m * n * sizeof(int));
-    // 输入矩阵元素
+
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
             scanf("%d", &elem[i][j]);
             *(p + i * n + j) = elem[i][j];
         }
     }
+
+    for (int i = 0; i < m; i++) {
+        int sum = 0;
+        for (int j = 0; j < n; j++) {
+            sum += *(p + i * n + j);
+        }
+        printf("%d\n", sum);
+    }
+    free(p);
+    return 0;
 }

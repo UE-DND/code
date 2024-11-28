@@ -23,20 +23,25 @@ int main() {
 
     for (int i = 0; i < 10; i++)
     {
-        scanf("%d", num + i);
+        num[i] = (int *)malloc(sizeof(int));
+        scanf("%d", num[i]);
     }
 
     int max = *num[0], min = *num[0];
-    for (int i = 0; i < 10; i++) 
-    {
-        if (*(num + i) > max)
-        {
-            max = *(num + i);
-        }
-        if (*(num + i) < min)
-        {
-            min = *(num + i);
+
+    for (int i = 1; i < 10; i++) {
+        if (*(num+i) > max) {
+            max = *(num+i);
+        } else if (*(num+i) < min) {
+            min = *(num+i);
         }
     }
-    printf("difference value = %d", max - min);
+
+    printf("difference value = %d\n", max - min);
+
+    for (int i = 0; i < 10; i++) {
+        free(num[i]);
+    }
+
+    return 0;
 }
