@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-
 struct staff
 {
     char id[5];
@@ -8,6 +5,9 @@ struct staff
     float salary_rate;
     float work_hours;
 };
+
+#include <stdio.h>
+#include <string.h>
 
 int main() {
     struct staff staff[6];
