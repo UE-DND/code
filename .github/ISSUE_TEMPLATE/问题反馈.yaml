@@ -1,0 +1,58 @@
+name: 问题反馈
+about: 代码存在的问题，或算法改进
+title: "[BUG]"
+labels: bug, documentation, enhancement
+assignees: UE-DND
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 问题描述
+        哪一个文件夹出现了问题？出现了什么问题？
+
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: 详细描述问题
+      placeholder: 请在此处提供详细的错误信息或异常行为。
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 目标
+        原本应该实现的效果 / 功能是怎么样的？或你希望添加什么样的效果 / 功能？
+
+  - type: textarea
+    id: target
+    attributes:
+      label: 实现目标
+      placeholder: 描述你期望的功能或修复的结果。
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 解决方案 & 算法改进
+        如果你有任何关于如何实现这个功能的想法或建议，请在这里提供。
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 解决方案和改进建议
+      placeholder: 提供你认为有效的解决方案或改进建议。
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 其他
+        可以提供你的联系方式。
+
+  - type: input
+    id: contact-info
+    attributes:
+      label: 联系方式
+      placeholder: （可选）请输入你的电子邮件或其他联系方式。
