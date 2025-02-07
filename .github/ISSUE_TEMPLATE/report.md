@@ -1,5 +1,5 @@
 ---
-name: 问题反馈
+name: 问题反馈-模板
 about: 代码存在的问题，或算法改进
 title: "[BUG]: "
 labels: bug, documentation, enhancement

@@ -1,5 +1,5 @@
 name: 问题反馈-表单
-description: File a bug report.
+description: 代码存在的问题，或算法改进
 title: "[Bug]: "
 labels: ["bug", "documentation", "enhancement"]
 assignees:
@@ -40,5 +40,4 @@ body:
       description: 提交这份表单前，你需要知道：
       options:
         - label: 我已知晓，表单的所有内容将会被公开并存档，即使主动删除。
-    validations:
-      required: true
+          required: true
