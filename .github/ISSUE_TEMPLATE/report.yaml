@@ -15,14 +15,16 @@ body:
       label: 发生了什么?
       description: 哪一个项目出现了问题？出现了什么问题？
       placeholder: 写下你发现的问题，或代码可以改进的地方...
-    required: true
+    validations:
+      required: true
   - type: textarea
     id: logs
     attributes:
       label: 控制台输出（可选）
       description: 在此粘贴运行结果、编译器警告或错误提示
       render: shell
-    required: false
+    validations:
+      required: false
   - type: input
     id: contact
     attributes:
