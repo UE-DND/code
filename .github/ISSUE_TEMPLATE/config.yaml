@@ -2,5 +2,9 @@ blank_issues_enabled: false
 
 templates:
   - file: "report.md"
-    name: "问题反馈"
+    name: "问题反馈-模板"
+    about: "代码存在的问题，或算法改进"
+
+  - file: "report.yaml"
+    name: "问题反馈-表单"
     about: "代码存在的问题，或算法改进"

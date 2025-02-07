@@ -1,7 +1,7 @@
 ---
 name: 问题反馈
 about: 代码存在的问题，或算法改进
-title: "[BUG]"
+title: "[BUG]: "
 labels: bug, documentation, enhancement
 assignees: UE-DND
 ---

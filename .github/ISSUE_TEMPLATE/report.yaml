@@ -1,0 +1,42 @@
+name: 问题反馈-表单
+description: File a bug report.
+title: "[Bug]: "
+labels: ["bug", "documentation", "enhancement"]
+assignees:
+  - UE-DND
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您花时间填写这份表单！
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 发生了什么?
+      description: 哪一个项目出现了问题？出现了什么问题？
+      placeholder: 写下你发现的问题，或代码可以改进的地方...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 控制台输出（可选）
+      description: 在此粘贴运行结果、编译器警告或错误提示
+      render: shell
+    required: false
+  - type: input
+    id: contact
+    attributes:
+      label: 联系方式（可选）
+      description: 邮箱或其他
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 确认提交
+      description: 提交这份表单前，你需要知道：
+      options:
+        - label: 我已知晓，表单的所有内容将会被公开并存档，即使主动删除。
+          required: true
