@@ -39,5 +39,5 @@ body:
       label: 确认提交
       description: 提交这份表单前，你需要知道：
       options:
-        - label: 我已知晓，表单的所有内容将会被公开并存档，即使主动删除。
+        - label: 我已知晓，表单内的所有内容（包括联系方式）将会被公开并存档，即使主动删除。
           required: true
