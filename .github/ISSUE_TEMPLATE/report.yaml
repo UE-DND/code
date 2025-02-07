@@ -15,8 +15,7 @@ body:
       label: 发生了什么?
       description: 哪一个项目出现了问题？出现了什么问题？
       placeholder: 写下你发现的问题，或代码可以改进的地方...
-    validations:
-      required: true
+    required: true
   - type: textarea
     id: logs
     attributes:
